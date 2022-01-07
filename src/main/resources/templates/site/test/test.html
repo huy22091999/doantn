@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/src/main/resources/static/css/site.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/responsive.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <main>
+        <header class="">
+            <div class="logo float-left">
+                <button class="btn-menu"><i class=" bi bi-list"></i></button>
+                <a href="">Dũng Ngọc Shop</a>
+            </div>
+            <div class="search float-left">
+                <form th:action="@{/search}" id="form-search" method="GET" >
+                    <input class="search-txt" type="text" name="key" th:value="${key}" placeholder="Search">
+                    <input onclick="search()"  class="search-btn" type="button" value=" ">
+                </form>
+            </div>
+            <div class="account float-right">
+                <div><a class="login" href="">Login</a>
+                    <a class="login" href="">sigin</a>
+                </div>
+            </div>
+        </header>
+        <div class="content">
+            <div class="navv float-left">
+                <ul>
+                    <li class="category">Danh Mục Sản Phẩm</li>
+                    <li> <a href="">Giày dép</a> </li>
+                    <li> <a href="">Quần áo</a> </li>
+                </ul>
+            </div>
+            <div class="overflow"></div>
+            <section>
+                <div class="info-custom float-left">
+                    <div class="comebackcart"><a href="">Giỏ hàng</a><i class="bi bi-caret-right-fill">Thông tin đơn
+                            hàng</i></div>
+                    <div class="form-info">
+                        <div class="title-security"><i class="bi bi-info-circle-fill"></i>Thông tin khách hàng tuyệt đối
+                            bảo mật</div>
+                        <h3 style="padding: 10px 0;">Thông tin giao hàng:</h3>
+                        <form th:action="@{/order}" id="form" method="post" th:object="${order}">
+                            <label for="hoTen">Họ và Tên</label>
+                            <input type="text" th:field="*{name}" id="hoTen" name="hoTen" placeholder="Họ & tên"><br>
+                            <small id="nameHId" ></small><br>
+                            <label for="diaChi">Địa chỉ</label>
+                            <textarea name="diaChi" th:field="*{adress}" id="diaChi" cols="" rows="5"
+                                placeholder="Địa chỉ"></textarea><br>
+                                <small id="addressHId" ></small><br>
+                            <label for="sdt">Số điện thoại</label>
+                            <input type="text" th:field="*{phone}" name="sdt" id="sdt" placeholder="Số điện thoại"><br>
+                            <small id="phoneHId" ></small><br>
+                            <label for="ghiChu">Ghi chú</label>
+                            <textarea name="ghiChi" th:field="*{note}" id="ghiChu" cols="" rows="5"
+                                placeholder="Ghi chú"></textarea>
+                                <br>
+                                <small id="noteHId" ></small>
+                            <label for="pptt">Phương thức thanh toán:</label><br>
+                            <input checked type="checkbox" id="checkbox1">
+                            <label for="checkbox1">Thanh toán khi nhận hàng</label>
+                            <br>
+                            <input disabled type="checkbox" id="checkbox2">
+                            <label for="checkbox2">Thanh toán qua MoMo (Sắp ra mắt)</label>
+                            <br>
+                            <small id="ptttHId" ></small>
+                            <div style="margin-top: 10px;text-align: right;">
+                                <a class="btn-backhome" th:href="@{/}">Quay lại
+                                    trang chủ</a>
+                                <input  id="submitt" type="button" value="Đặt hàng">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <div class="main-foot">
+                    <div class="info-foot">
+                        <img src="/src/main/resources/static/images/Capture.PNG" alt="">
+                        <ul>
+                            <li>Địa chỉ: Cầu Mây Phú Bình Thái Nguyên Province</li>
+                            <li>Số điện thoại: 0955977222</li>
+                            <li>Email: Dungngocshop@gmail.com </li>
+                        </ul>
+                    </div>
+                    <div class="link-foot">
+                        <h3>Về chúng tôi</h3>
+                        <ul>
+                            <li> <a href="">Giới thiệu</a> </li>
+                            <li> <a href="">Giao hàng - Đổi trả</a></li>
+                            <li> <a href="">Chính sách bảo mật</a></li>
+                            <li> <a href="">Liên hệ</a></li>
+                        </ul>
+                    </div>
+                    <div class="help-foot">
+                        <h3>Trợ giúp</h3>
+                        <ul>
+                            <li>Hướng dẫn mua hàng</li>
+                        </ul>
+                    </div>
+                    <div class="register-foot">
+                        <h3>Đăng kí nhận thông tin</h3>
+                        <form action="" method="post">
+                            <input type="text" placeholder="Đăng kí nhận tin">
+                            <input type="submit" value="Gửi">
+                        </form>
+                        <h3>Liên kết</h3>
+                        <h2><i class="bi bi-facebook"></i><i class="bi bi-youtube"></i></h2>
+                    </div>
+                </div>
+                <div class="more-foot">
+                    <h4>© Bản quyền thuộc về Dũng Ngọc Shop | Powered by Huy Nguyen.</h4>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script>document.getElementById("add-cart").addEventListener("click",function(){
+        var qty=document.getElementById("qty");
+        var quantity=document.getElementById("quantity");
+        if(document.getElementById("size").value=="")
+        {
+          document.getElementById("message").innerText="Bạn chưa chọn Size";
+        }
+        else if(qty.value<1||qty.value>quantity.value)
+        {
+          document.getElementById("message").innerText="Số lượng bạn chọn quá lớn";
+        }
+        else{
+          document.getElementById("form").submit();
+        }
+        
+      });</script>
+      <script src="/src/main/resources/static/js/site.js"></script>
+
+</html>

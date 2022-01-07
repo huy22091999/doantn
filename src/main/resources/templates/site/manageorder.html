@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layout.html}">
+
+<head>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <div class="profile">
+            <div class="tab">
+                <div class="user-image"><i class="bi bi-person-bounding-box"> <span th:text="${customerName}">Huy </span> </i></div>
+                <a th:href="@{/detailacc}" class="tablinks">Tài khoản của
+                    tôi</a>
+                <a class="tablinks active">Đơn mua</a>
+                <a class="tablinks">Thông báo</a>
+            </div>
+            <div id="ordermanage" class="tabcontent">
+                <div class="btn-tab"><button class="tablink" onclick="openPage('all', this)">Tất cả</button>
+                    <button class="tablink" onclick="openPage('new1', this)" id="sub-defaultOpen">Chờ xác
+                        nhận</button>
+                    <button class="tablink" onclick="openPage('new2', this)">Chờ lấy hàng</button>
+                    <button class="tablink" onclick="openPage('new3', this)">Đang giao </button>
+                    <button class="tablink" onclick="openPage('new4', this)">Đã giao</button>
+                    <button class="tablink" onclick="openPage('new0', this)">Đã hủy</button>
+                </div>
+                <div id="all" class="sub-tabcontent">
+                    <div th:each=" item : ${list}" class="oder-item">
+                        <a th:href="@{'/order/detail/'+${item.oderId}}">
+                            <div th:each="order : ${item.oderDetails}" class="product-order-list">
+                                <div class="product-order-item">
+                                    <img class="float-left" th:src="@{'/uploads/images/'+${order.product.image}}" alt="">
+                                    <ul class="float-left">
+                                        <li th:text="${order.product.name}">Tên sản phẩm</li>
+                                        <li th:if="${order.size!=null}">Size: <span th:text="${order.size.name}"></span></li>
+                                        <li>Số lượng: <span  th:text="${order.quantity}"></span></li>
+                                    </ul>
+                                    <div class="float-right product-order-item-price">
+                                        <span th:text="${#numbers.formatInteger(order.unitPrice,3,'POINT')}">7000</span><span>đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="order-item-price float-right">
+                            <h4>tổng: <span th:text="${#numbers.formatInteger(item.summary+item.ship,3,'POINT')}"></span> đ</h4>
+                            <div><a th:if="${item.status==1||item.status==2}" class="btn-form" th:href="@{'/order/cancel/'+${item.oderId}}">Hủy</a>
+                                
+                                <a th:if="${item.status==4||item.status==0}" class="btn-form" th:href="@{'/order/rebuy/'+${item.oderId}}">Mua lại</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="new1" class="sub-tabcontent">
+                    <div th:each=" item : ${list1}" class="oder-item">
+                        <a th:href="@{'/order/detail/'+${item.oderId}}">
+                            <div th:each="order : ${item.oderDetails}" class="product-order-list">
+                                <div class="product-order-item">
+                                    <img class="float-left" th:src="@{'/uploads/images/'+${order.product.image}}" alt="">
+                                    <ul class="float-left">
+                                        <li th:text="${order.product.name}">Tên sản phẩm</li>
+                                        <li th:if="${order.size!=null}">Size: <span th:text="${order.size.name}"></span></li>
+                                        <li>Số lượng: <span  th:text="${order.quantity}"></span></li>
+                                    </ul>
+                                    <div class="float-right product-order-item-price">
+                                        <span th:text="${#numbers.formatInteger(order.unitPrice,3,'POINT')}">7000</span><span>đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="order-item-price float-right">
+                            <h4>tổng: <span th:text="${#numbers.formatInteger(item.summary +item.ship,3,'POINT')}"></span> đ</h4>
+                            <div><a th:if="${item.status==1||item.status==2}" class="btn-form" th:href="@{'/order/cancel/'+${item.oderId}}">Hủy</a>
+                                
+                                <a th:if="${item.status==4||item.status==0}" class="btn-form" th:href="@{'/order/rebuy/'+${item.oderId}}">Mua lại</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="new2" class="sub-tabcontent">
+                    <div th:each=" item : ${list2}" class="oder-item">
+                        <a th:href="@{'/order/detail/'+${item.oderId}}">
+                            <div th:each="order : ${item.oderDetails}" class="product-order-list">
+                                <div class="product-order-item">
+                                    <img class="float-left" th:src="@{'/uploads/images/'+${order.product.image}}" alt="">
+                                    <ul class="float-left">
+                                        <li th:text="${order.product.name}">Tên sản phẩm</li>
+                                        <li th:if="${order.size!=null}">Size: <span th:text="${order.size.name}"></span></li>
+                                        <li>Số lượng: <span  th:text="${order.quantity}"></span></li>
+                                    </ul>
+                                    <div class="float-right product-order-item-price">
+                                        <span th:text="${#numbers.formatInteger(order.unitPrice,3,'POINT')}">7000</span><span>đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="order-item-price float-right">
+                            <h4>tổng: <span th:text="${#numbers.formatInteger(item.summary+item.ship,3,'POINT')}"></span> đ</h4>
+                            <div><a th:if="${item.status==1||item.status==2}" class="btn-form" th:href="@{'/order/cancel/'+${item.oderId}}">Hủy</a>
+                               
+                                <a th:if="${item.status==4||item.status==0}" class="btn-form" th:href="@{'/order/rebuy/'+${item.oderId}}">Mua lại</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="new3" class="sub-tabcontent">
+                    <div th:each=" item : ${list3}" class="oder-item">
+                        <a th:href="@{'/order/detail/'+${item.oderId}}">
+                            <div th:each="order : ${item.oderDetails}" class="product-order-list">
+                                <div class="product-order-item">
+                                    <img class="float-left" th:src="@{'/uploads/images/'+${order.product.image}}" alt="">
+                                    <ul class="float-left">
+                                        <li th:text="${order.product.name}">Tên sản phẩm</li>
+                                        <li th:if="${order.size!=null}">Size: <span th:text="${order.size.name}"></span></li>
+                                        <li>Số lượng: <span  th:text="${order.quantity}"></span></li>
+                                    </ul>
+                                    <div class="float-right product-order-item-price">
+                                        <span th:text="${#numbers.formatInteger(order.unitPrice,3,'POINT')}">7000</span><span>đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="order-item-price float-right">
+                            <h4>tổng: <span th:text="${#numbers.formatInteger(item.summary+item.ship,3,'POINT')}"></span> đ</h4>
+                            <div><a th:if="${item.status==1||item.status==2}" class="btn-form" th:href="@{'/order/cancel/'+${item.oderId}}">Hủy</a>
+                                
+                                <a th:if="${item.status==4||item.status==0}" class="btn-form" th:href="@{'/order/rebuy/'+${item.oderId}}">Mua lại</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="new4" class="sub-tabcontent">
+                    <div th:each=" item : ${list4}" class="oder-item">
+                        <a th:href="@{'/order/detail/'+${item.oderId}}">
+                            <div th:each="order : ${item.oderDetails}" class="product-order-list">
+                                <div class="product-order-item">
+                                    <img class="float-left" th:src="@{'/uploads/images/'+${order.product.image}}" alt="">
+                                    <ul class="float-left">
+                                        <li th:text="${order.product.name}">Tên sản phẩm</li>
+                                        <li th:if="${order.size!=null}">Size: <span th:text="${order.size.name}"></span></li>
+                                        <li>Số lượng: <span  th:text="${order.quantity}"></span></li>
+                                    </ul>
+                                    <div class="float-right product-order-item-price">
+                                        <span th:text="${#numbers.formatInteger(order.unitPrice,3,'POINT')}">7000</span><span>đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="order-item-price float-right">
+                            <h4>tổng: <span th:text="${#numbers.formatInteger(item.summary+item.ship,3,'POINT')}"></span> đ</h4>
+                            <div><a th:if="${item.status==1||item.status==2}" class="btn-form" th:href="@{'/order/cancel/'+${item.oderId}}">Hủy</a>
+                                
+                                <a th:if="${item.status==4||item.status==0}" class="btn-form" th:href="@{'/order/rebuy/'+${item.oderId}}">Mua lại</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="new0" class="sub-tabcontent">
+                    <div th:each=" item : ${list0}" class="oder-item">
+                        <a th:href="@{'/order/detail/'+${item.oderId}}">
+                            <div th:each="order : ${item.oderDetails}" class="product-order-list">
+                                <div class="product-order-item">
+                                    <img class="float-left" th:src="@{'/uploads/images/'+${order.product.image}}" alt="">
+                                    <ul class="float-left">
+                                        <li th:text="${order.product.name}">Tên sản phẩm</li>
+                                        <li th:if="${order.size!=null}">Size: <span th:text="${order.size.name}"></span></li>
+                                        <li>Số lượng: <span  th:text="${order.quantity}"></span></li>
+                                    </ul>
+                                    <div class="float-right product-order-item-price">
+                                        <span th:text="${#numbers.formatInteger(order.unitPrice,3,'POINT')}">7000</span><span>đ</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <div class="order-item-price float-right">
+                            <h4>tổng: <span th:text="${#numbers.formatInteger(item.summary+item.ship,3,'POINT')}"></span> đ</h4>
+                            <div><a th:if="${item.status==1||item.status==2}" class="btn-form" th:href="@{'/order/cancel/'+${item.oderId}}">Hủy</a>
+                               
+                                <a th:if="${item.status==4||item.status==0}" class="btn-form" th:href="@{'/order/rebuy/'+${item.oderId}}">Mua lại</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

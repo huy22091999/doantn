@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/dashboard.html}">
+
+<head>
+</head>
+
+<body>
+  <section class="container mt-3" layout:fragment="content">
+    <div class="">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Mã Khách</th>
+            <th>Tên khách</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Số đơn đã mua</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each=" item: ${list}">
+            <td scope="row">#<span th:text="${item.customerId}"></span></td>
+            <td th:text="${item.name}">Huy nguyễn</td>
+            <td th:text="${item.email}">Huycnttk10</td>
+            <td th:text="${item.phone}">09658542225</td>
+            <td th:text="${item.orders.size}">5</td>
+          </tr>
+          
+        </tbody>
+      </table>
+
+    </div>
+  </section>
+</body>
+
+</html>

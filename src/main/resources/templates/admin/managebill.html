@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/dashboard.html}">
+
+<head>
+</head>
+
+<body>
+
+  <section class="container mt-3" layout:fragment="content">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="#home">Tất cả</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu1">Chưa xác nhận</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu2">Đang chuẩn bị</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu3">Đang giao</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu4">Đã giao</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="#menu0">Đã hủy</a>
+      </li>
+    </ul>
+
+    <div class="tab-content">
+      <div id="home" class="container tab-pane active"><br>
+        <table class="table  table-bordered ">
+          <h4>Danh sách đơn hàng</h4>
+          <thead class="thead-inverse">
+            <tr>
+              <th><input type="checkbox" name="" id=""></th>
+              <th>Ngày đặt</th>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Số sản phẩm</th>
+              <th>Giao hàng</th>
+              <th>Tổng tiền</th>
+              <th>Lời nhắn</th>
+              <th>Trạng thái đơn hàng</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each=" item: ${list}">
+              <td scope="row"></td>
+              <td th:text="${item.oderDate}">20/09/2021 7:37 PM</td>
+              <td><a th:href="@{'/admin/order/detail/'+${item.oderId}}" th:text="'#'+${item.oderId}">#1001</a></td>
+              <td><a ref="#" th:text="${item.customer.name}"></a> </td>
+              <td th:text="${item.amount}">2</td>
+              <td th:text="${item.status>3 ? 'Đã giao' : 'Chưa'}">Chưa</td>
+              <td th:text="${item.summary}">10000đ</td>
+              <td th:text="${item.note}">giao hàng nhanh nha</td>
+              <td>
+                <span th:if="${item.status==1}" >Chưa xác nhận</span>
+                <span th:if="${item.status==2}" >Đang chuẩn bị hàng</span>
+                <span th:if="${item.status==3}" >Đang giao hàng</span>
+                <span th:if="${item.status==4}" >Đã giao hàng</span>
+                <span th:if="${item.status==0}" >Đã bị hủy</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div id="menu1" class="container tab-pane fade"><br>
+        <table class="table  table-bordered ">
+          <h4>Danh sách đơn hàng</h4>
+          <thead class="thead-inverse">
+            <tr>
+              <th><input type="checkbox" name="" id=""></th>
+              <th>Ngày đặt</th>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Số sản phẩm</th>
+              <th>Giao hàng</th>
+              <th>Tổng tiền</th>
+              <th>Lời nhắn</th>
+              <th>CHuyển trạng thái</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each=" item: ${list1}">
+              <td scope="row"></td>
+              <td th:text="${item.oderDate}">20/09/2021 7:37 PM</td>
+              <td><a th:href="@{'/admin/order/detail/'+${item.oderId}}" th:text="'#'+${item.oderId}">#1001</a></td>
+              <td><a ref="#" th:text="${item.customer.name}"></a></td>
+              <td th:text="${item.amount}">2</td>
+              <td th:text="${item.status>3 ? 'Đã giao' : 'Chưa'}">Chưa</td>
+              <td th:text="${item.summary}">10000đ</td>
+              <td th:text="${item.note}">giao hàng nhanh nha</td>
+              <td>
+                <a class="btn btn-dark" th:href="@{'/admin/order/confim/'+${item.oderId}}">CTT đã xác
+                  nhận</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="menu2" class="container tab-pane fade"><br>
+        <table class="table  table-bordered ">
+          <h4>Danh sách đơn hàng</h4>
+          <thead class="thead-inverse">
+            <tr>
+              <th><input type="checkbox" name="" id=""></th>
+              <th>Ngày đặt</th>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Số sản phẩm</th>
+              <th>Giao hàng</th>
+              <th>Tổng tiền</th>
+              <th>Lời nhắn</th>
+              <th>CHuyển trạng thái</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each=" item: ${list2}">
+              <td scope="row"></td>
+              <td th:text="${item.oderDate}">20/09/2021 7:37 PM</td>
+              <td><a th:href="@{'/admin/order/detail/'+${item.oderId}}" th:text="'#'+${item.oderId}">#1001</a></td>
+              <td><a ref="#" th:text="${item.customer.name}"></a></td>
+              <td th:text="${item.amount}">2</td>
+              <td th:text="${item.status>3 ? 'Đã giao' : 'Chưa'}">Chưa</td>
+              <td th:text="${item.summary}">10000đ</td>
+              <td th:text="${item.note}">giao hàng nhanh nha</td>
+              <td>
+                <a class="btn btn-dark" th:href="@{'/admin/order/confim/'+${item.oderId}}">CTT đang giao</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="menu3" class="container tab-pane fade"><br>
+        <table class="table  table-bordered ">
+          <h4>Danh sách đơn hàng</h4>
+          <thead class="thead-inverse">
+            <tr>
+              <th><input type="checkbox" name="" id=""></th>
+              <th>Ngày đặt</th>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Số sản phẩm</th>
+              <th>Giao hàng</th>
+              <th>Tổng tiền</th>
+              <th>Lời nhắn</th>
+              <th>Chuyển trạng thái</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each=" item: ${list3}">
+              <td scope="row"><input type="checkbox" name="" id=""></td>
+              <td th:text="${item.oderDate}">20/09/2021 7:37 PM</td>
+              <td><a th:href="@{'/admin/order/detail/'+${item.oderId}}" th:text="'#'+${item.oderId}">#1001</a></td>
+              <td><a ref="#" th:text="${item.customer.name}"></a></td>
+              <td th:text="${item.amount}">2</td>
+              <td th:text="${item.status>3 ? 'Đã giao' : 'Chưa'}">Chưa</td>
+              <td th:text="${item.summary}">10000đ</td>
+              <td th:text="${item.note}">giao hàng nhanh nha</td>
+              <td>
+                <a class="btn btn-dark" th:href="@{'/admin/order/traned/'+${item.oderId}}">CTT đã giao hàng</a>
+                <a class="btn btn-dark" th:href="@{'/admin/order/traned/'+${item.oderId}}">CTT giao hàng không thành công</a>
+
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div id="menu4" class="container tab-pane fade"><br>
+        <table class="table  table-bordered ">
+          <h4>Danh sách đơn hàng</h4>
+          <thead class="thead-inverse">
+            <tr>
+              <th><input type="checkbox" name="" id=""></th>
+              <th>Ngày đặt</th>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Số sản phẩm</th>
+              <th>Giao hàng</th>
+              <th>Tổng tiền</th>
+              <th>Lời nhắn</th>
+              <th>Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each=" item: ${list4}">
+              <td scope="row"></td>
+              <td th:text="${item.oderDate}">20/09/2021 7:37 PM</td>
+              <td><a th:href="@{'/admin/order/detail/'+${item.oderId}}" th:text="'#'+${item.oderId}">#1001</a></td>
+              <td><a ref="#" th:text="${item.customer.name}"></a></td>
+              <td th:text="${item.amount}">2</td>
+              <td th:text="${item.status>3 ? 'Đã giao' : 'Chưa'}">Chưa</td>
+              <td th:text="${item.summary}">10000đ</td>
+              <td th:text="${item.note}">giao hàng nhanh nha</td>
+              <td>
+                <span>Đã giao</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+      <div id="menu0" class="container tab-pane fade"><br>
+        <table class=" table  table-bordered">
+          <h4>Danh sách đơn hàng</h4>
+          <thead class="thead-inverse">
+            <tr>
+              <th><input type="checkbox" name="" id=""></th>
+              <th>Ngày đặt</th>
+              <th>Mã đơn</th>
+              <th>Khách hàng</th>
+              <th>Số sản phẩm</th>
+              <th>Giao hàng</th>
+              <th>Tổng tiền</th>
+              <th>Lời nhắn</th>
+              <th>Trạng thái</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each=" item: ${list0}">
+              <td scope="row"></td>
+              <td th:text="${item.oderDate}">20/09/2021 7:37 PM</td>
+              <td><a th:href="@{'/admin/order/detail/'+${item.oderId}}" th:text="'#'+${item.oderId}">#1001</a></td>
+              <td><a ref="#" th:text="${item.customer.name}"></a></td>
+              <td th:text="${item.amount}">2</td>
+              <td th:text="${item.status>3 ? 'Đã giao' : 'Chưa'}">Chưa</td>
+              <td th:text="${#numbers.formatInteger(item.summary+item.ship,3,'POINT')}">10000đ</td>
+              <td th:text="${item.note}">giao hàng nhanh nha</td>
+              <td>
+                <span>Đã hủy</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

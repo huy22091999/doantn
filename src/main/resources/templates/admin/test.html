@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <title>Admin-Dũng Ngọc Shop</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" th:href="@{/css/admin.css}">
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <section class="row" layout:fragment="content">
+        <div class="col  mt-4">
+            <form th:action="@{/admin/product/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Add product</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-7">
+                                <div hidden class="form-group">
+                                    <label for="productId ">Product Id</label>
+                                    <input type="text" th:field="*{productId}" class="form-control" name="productId"
+                                        id="productId" aria-describedby="productIdHId" placeholder="Product ID">
+                                    <small id="productIdHId" class="form-text text-muted">Product ID is required</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control" th:field="*{name}" name="name"
+                                        id="name aria-describedby=nameHId" placeholder="Product name">
+                                    <small id="nameHId" class="form-text text-muted">Product name is required</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity ">Quantity</label>
+                                    <input type="text" class="form-control" th:field="*{quantity}" name="quantity"
+                                        id="quantity" aria-describedby="proquantity" placeholder="Quantity">
+                                    <small id="quantityHId" class="form-text text-muted">Quantity is required</small>
+                                </div>
+                                <div class="input-group form-group">
+                                    <span class="input-group-text">Unit price</span>
+                                    <input type="number" th:field="*{unitPrice}" name="unitPrice" id="unitPrice"
+                                        class="form-control" placeholder="Unit Price">
+                                    <span class="input-group-text">VND</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category.categoryId">Category</label>
+                                    <select class="form-control" name="category.categoryId" id="category.categoryId"
+                                        th:field="*{category.categoryId}">
+                                        <option th:each=" cate: ${categorys}" th:value="${cate.categoryId}"
+                                            th:text="${cate.name}"
+                                            th:selected="${cate.categoryId==product.category.categoryId}">C1</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Phân loại hàng</label>
+                                    <button type="button" onclick="addSize()">+</button>
+                                    <div class="productsize">
+                                        <div class="product_size_item row" th:each="size,item: *{sizes}">
+                                            <label for="name-size">Tên size:</label>
+                                            <input class="col-2 form-control" id="name-size" name="name-size"
+                                                type="text" th:field="*{sizes[__${item.index}__].name}">
+                                            <label for="quantity-size">Số lượng:</label>
+                                            <input class="col-2 form-control" id="quantity-size" name="quantity-size"
+                                                type="text" th:field="*{sizes[__${item.index}__].quantity}">
+                                            <label for="quantity-size">Giá:</label>
+                                            <input class="col-2 form-control" id="price-size" name="price-size"
+                                                type="text" th:field="*{sizes[__${item.index}__].price}">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <script>
+                                    function chooseImage(fileInput,n) {
+                                        if (fileInput.files && fileInput.files[0]) {
+                                            var reader = new FileReader();
+
+                                            reader.onload = function (e) {
+                                                $('.image'+n).attr('src', e.target.result);
+                                            }
+                                            reader.readAsDataURL(fileInput.files[0]);
+                                        }
+                                    }
+                                </script>
+                                <div class="form-group">
+                                    <label class="label_image"  for="productImage1"> <img class="image1" width="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,1)" class="form-control-file file"
+                                        name="productImage" id="productImage1" aria-describ edby="productImageHpId"
+                                        placeholder="Product Image">
+                                    <label class="label_image"  for="productImage2"> <img class="image2" width="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,2)" class="form-control-file file"
+                                            name="productImage" id="productImage2" aria-describedby="productImageHpId"
+                                            placeholder="Product Image">
+                                    <style>
+                                        .file{
+                                            display: none;
+                                        }
+                                        .label_image{
+                                            border: dashed 0.1px #000;
+                                            width: 100px;
+                                            height: 100px;
+                                        }
+                                        .label_image img{
+                                            
+                                        }
+
+                                    </style>
+                                </div>
+                            
+
+                                <div class="input-group form-group">
+                                    <span class="input-group-text">Discount</span>
+                                    <input type="number" name="discount" th:field="*{discount}" id="discount"
+                                        class="form-control" placeholder="Discount">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" name="status" th:field="*{status}" id="status">
+                                        <option value="0">on sale</option>
+                                        <option value="1">out of stock</option>
+                                        <option value="2">featured</option>
+                                        <option value="3">Best Seller</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="description">Description</label>
+                                    <textarea th:field="*{description}" class="form-control" name="description"
+                                        id="description" cols="30" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <button class="btn btn-success">New</button>
+                        <button class="btn btn-primary"><span th:if="${isedit==true}"> Update</span>
+                            <span th:unless="${isedit==true}"> Save</span></button>
+                        <button class="btn btn-danger float-right">Delete</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script th:src="@{/js/site.js}"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

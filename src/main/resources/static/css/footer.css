@@ -1,0 +1,95 @@
+/* footer */
+footer {
+    width: 100%;
+    background-color: #eaeaea;
+    display: inline-block;
+    overflow: hidden;
+    padding: 40px 40px 10px 40px ;
+}
+.main-foot{
+    height: 250px;
+    border-bottom:solid .1px #afaeae ;
+}
+
+.info-foot {
+    width: 35%;
+    float: left;
+    padding-right: 10px;
+}
+.info-foot ul li {
+    list-style-type: none;
+    padding: 5px;
+}
+.info-foot img{
+    width: 50%;
+    height: fit-content;
+    text-align: center;
+}
+
+.link-foot {
+    width: 20%;
+    float: left;
+
+}
+.link-foot ul{
+    padding-top: 10px;
+}
+.link-foot ul li{
+    padding: 5px;
+    
+}
+.link-foot ul li a{
+    text-decoration: none;
+    color: #000000;
+}
+.help-foot {
+    width: 20%;
+     float: left;
+
+}
+.help-foot ul{
+    padding-top: 10px;
+}
+
+.register-foot {
+    width: 25%;
+    float: left;
+
+}
+.register-foot form{
+    padding: 15px 0;
+}
+.register-foot form input{
+    height: 30px;
+    border-radius: 0;
+    border: none;
+    padding: 5px;
+}
+.register-foot form input[type=submit]{
+    width: 50px;
+    background-color: #7bc47d;
+    transform: translateX(-3px);
+}
+.register-foot h2{
+    margin: 10px;
+}
+.register-foot h2 i{
+    margin-right: 10px;
+}
+.register-foot h2 .bi-facebook{
+    color: #415a99;
+}
+.register-foot h2 .bi-youtube{
+    color: #cb222a;
+}
+.more-foot{
+    width: 100%;
+    padding-top: 20px;
+    text-align: center;
+}
+footer h4 {
+    font-size: 16px;
+}
+footer h4{
+    font-size: 18.7px;
+}

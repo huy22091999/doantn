@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layout.html}">
+
+<head>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <div class="profile">
+            <div class="tab">
+                <div class="user-image"><i class="bi bi-person-bounding-box"> <span
+                            th:text="${customerName}">Huy </span> </i></div>
+                <a th:href="@{/detailacc}" class="tablinks">Tài khoản của
+                    tôi</a>
+                <a th:href="@{/order/manageorder}" class="tablinks active">Đơn mua</a>
+                <a class="tablinks">Thông báo</a>
+            </div>
+            <div class="order-detail">
+                <div class="order-detail-info">
+                    <h4>Thông tin giao hàng</h4>
+                    <ul>
+                        <li>Họ và tên: <span th:text="${order.name}">Nguyễn văn Huy</span></li>
+                        <li>Số điện thoại: <span th:text="${order.phone}">0123456987</span></li>
+                        <li>Địa chỉ: <span th:text="${order.adress}">Bảo lý Phú bình Thái nguyên</span></li>
+                    </ul>
+                </div>
+                <div class="order-detail-list">
+                    <div th:each=" item: ${order.oderDetails}" class="order-detail-item">
+                        <img class="float-left" th:src="@{'/uploads/images/'+${item.product.image}}" src="/src/main/resources/static/uploads/images/p5fa1a193-2401-4000-abae-6eb04f97cef0.jpg" alt="">
+                        <ul class="float-left">
+                            <li th:text="${item.product.name}">Áo bà bầu</li>
+                            <li th:if="${item.size!=null}">Size: <span th:text="${item.size.name}">M</span></li>
+                            <li>Số lượng:<span th:text="${item.quantity}"></span></li>
+                        </ul>
+                        <div class="order-detail-item-price float-right" >
+                            <p><span
+                                    th:text="${#numbers.formatInteger(item.product.unitPrice,3,'POINT')}">30000</span><span>đ</span>
+                                <del><span th:text="${#numbers.formatInteger(item.product.unitPrice +(item.product.discount*item.product.unitPrice)/100,3,'POINT')}">10000</span>đ<span></span> </del>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="order-detail-pay">
+                    <ul>
+                        <li>Tổng tiền hàng:<span
+                                th:text="${#numbers.formatInteger(order.summary,3,'POINT')}"> 100000</span><span> đ</span></li>
+                        <li>Phí vận chuyển: <span th:text="${#numbers.formatInteger(order.ship,3,'POINT')}"> 0</span><span> đ</span>
+                        </li>
+                        <li>Khuyến mãi:<span> 0</span> <span> đ</span></li>
+                        <li>Tổng cộng:<span
+                                th:text="${#numbers.formatInteger(order.summary +order.ship,3,'POINT')}">
+                                100000</span> <span> đ</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

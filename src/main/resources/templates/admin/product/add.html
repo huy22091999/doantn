@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{admin/dashboard.html}">
+
+<head>
+</head>
+
+<body>
+    <section class="row" layout:fragment="content">
+        <div class="col  mt-4">
+            <form th:action="@{/admin/product/save}" th:object="${product}" method="post" enctype="multipart/form-data">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Thêm sản phẩm</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-7">
+                                <div hidden class="form-group">
+                                    <label for="productId ">Mã sản Phẩm</label>
+                                    <input type="text" th:field="*{productId}" class="form-control" name="productId"
+                                        id="productId" aria-describedby="productIdHId" placeholder="Product ID">
+                                    <small id="productIdHId" class="form-text text-muted">Bạn chưa nhập mã sản phẩm</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="name">Tên sản phẩm</label>
+                                    <input type="text" class="form-control" th:field="*{name}" name="name"
+                                        id="name aria-describedby=nameHId" placeholder="Product name">
+                                    <small id="nameHId" class="form-text text-muted">Bạn chưa nhập tên sản phẩm</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="quantity ">Số lượng</label>
+                                    <input type="text" class="form-control" th:field="*{quantity}" name="quantity"
+                                        id="quantity" aria-describedby="proquantity" placeholder="Quantity">
+                                    <small id="quantityHId" class="form-text text-muted">Bạn chưa nhập số lượng</small>
+                                </div>
+                                <div class="input-group form-group">
+                                    <span class="input-group-text">Đơn giá</span>
+                                    <input type="number" th:field="*{unitPrice}" name="unitPrice" id="unitPrice"
+                                        class="form-control" placeholder="Unit Price">
+                                    <span class="input-group-text">VND</span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category.categoryId">Danh mục</label>
+                                    <select class="form-control" name="category.categoryId" id="category.categoryId"
+                                        th:field="*{category.categoryId}">
+                                        <option th:each=" cate: ${categorys}" th:value="${cate.categoryId}"
+                                            th:text="${cate.name}"
+                                            th:selected="${cate.categoryId==product.category.categoryId}">C1</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Phân loại hàng</label>
+                                    <button type="button" onclick="addSize()">+</button>
+                                    <div class="productsize">
+                                        <div class="product_size_item row" th:each="size,item: *{sizes}">
+                                            <label for="name-size">Tên size:</label>
+                                            <input class="col-2 form-control" id="name-size" name="name-size"
+                                                type="text" th:field="*{sizes[__${item.index}__].name}">
+                                            <label for="quantity-size">Số lượng:</label>
+                                            <input class="col-2 form-control" id="quantity-size" name="quantity-size"
+                                                type="text" th:field="*{sizes[__${item.index}__].quantity}">
+                                            <label for="quantity-size">Giá:</label>
+                                            <input class="col-2 form-control" id="price-size" name="price-size"
+                                                type="text" th:field="*{sizes[__${item.index}__].price}">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-5">
+                                <script>
+                                    function chooseImage(fileInput, n) {
+                                        if (fileInput.files && fileInput.files[0]) {
+                                            var reader = new FileReader();
+
+                                            reader.onload = function (e) {
+                                                $('.image' + n).attr('src', e.target.result);
+                                            }
+                                            reader.readAsDataURL(fileInput.files[0]);
+                                        }
+                                    }
+                                </script>
+                                <div class="form-group">
+                                    <label class="label_image" for="productImage0"> <img class="image0" width="100%"
+                                        th:src="${product.images!=null && product.images[0]!=null} ? @{'/uploads/images/'+${product.images[0].img}} : @{/images/plus.png} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,0)" th:field="*{files[0]}"
+                                        class="form-control-file file" name="productImage0" id="productImage0"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage1"> <img 
+                                        th:src="${product.images!=null && product.images[1]!=null} ? @{'/uploads/images/'+${product.images[1].img}} : @{/images/plus.png} "
+                                         class="image1" width="100%"
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,1)" th:field="*{files[1]}"
+                                        class="form-control-file file" name="productImage1" id="productImage1"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage2"> <img class="image2" width="100%"
+                                        th:src="${product.images!=null && product.images[2]!=null} ? @{'/uploads/images/'+${product.images[2].img}} : @{/images/plus.png} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,2)" th:field="*{files[2]}"
+                                        class="form-control-file file" name="productImage2" id="productImage2"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage3"> <img class="image3" width="100%"
+                                        th:src="${product.images!=null && product.images[3]!=null} ? @{'/uploads/images/'+${product.images[3].img}} : @{/images/plus.png} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,3)" th:field="*{files[3]}"
+                                        class="form-control-file file" name="productImage3" id="productImage3"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage4"> <img class="image4" width="100%"
+                                        th:src="${product.images!=null && product.images[4]!=null} ? @{'/uploads/images/'+${product.images[4].img}} : @{/images/plus.png} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,4)" th:field="*{files[4]}"
+                                        class="form-control-file file" name="productImage4" id="productImage4"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage5"> <img class="image5" width="100%"
+                                        th:src="${product.images!=null && product.images[5]!=null} ? @{'/uploads/images/'+${product.images[5].img}} : @{/images/plus.png} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,5)" th:field="*{files[5]}"
+                                        class="form-control-file file" name="productImage5" id="productImage5"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage6"> <img class="image6" width="100%"
+                                        th:src="${product.images!=null && product.images[6]!=null} ? @{'/uploads/images/'+${product.images[6].img}} : @{/images/plus.PNG} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,6)" th:field="*{files[6]}"
+                                        class="form-control-file file" name="productImage6" id="productImage6"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage7"> <img class="image7" width="100%"
+                                        th:src="${product.images!=null && product.images[7]!=null} ? @{'/uploads/images/'+${product.images[7].img}} : @{/images/plus.png} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,7)" th:field="*{files[7]}"
+                                        class="form-control-file file" name="productImage7" id="productImage7"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage8"> <img class="image8" width="100%"
+                                        th:src="${product.images!=null && product.images[8]!=null} ? @{'/uploads/images/'+${product.images[8].img}} : @{/images/plus.png} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,8)" th:field="*{files[8]}"
+                                        class="form-control-file file" name="productImage8" id="productImage8"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+
+                                    <label class="label_image" for="productImage9"> <img class="image9" width="100%"
+                                        th:src="${product.images!=null && product.images[9]!=null} ? @{'/uploads/images/'+${product.images[9].img}} : @{/images/plus.png} "
+                                            height="100%" /></label>
+                                    <input type="file" onchange="chooseImage(this,9)" th:field="*{files[9]}"
+                                        class="form-control-file file" name="productImage9" id="productImage9"
+                                        aria-describ edby="productImageHpId" placeholder="Product Image">
+                                </div>
+                                <style>
+                                    .file {
+                                        display: none;
+                                    }
+
+                                    .label_image {
+                                        border: dashed 0.1px #000;
+                                        width: 100px;
+                                        height: 100px;
+                                    }
+
+                                    .label_image img {}
+                                </style>
+
+                                <div class="input-group form-group">
+                                    <span class="input-group-text">Giảm giá</span>
+                                    <input type="number" name="discount" th:field="*{discount}" id="discount"
+                                        class="form-control" placeholder="Discount">
+                                    <span class="input-group-text">%</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="status">Status</label>
+                                    <select class="form-control" name="status" th:field="*{status}" id="status">
+                                        <option value="0">Đang giảm giá</option>
+                                        <option value="1">Hết hàng</option>
+                                        <option value="2">Sản phẩm hot</option>
+                                        <option value="3">Sản phẩm bán chạy</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="description">Chi tiết sản phẩm</label>
+                                    <textarea th:field="*{description}" class="form-control" name="description"
+                                        id="description" cols="30" rows="5"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <button class="btn btn-success">Thêm mới</button>
+                        <button class="btn btn-primary"><span th:if="${isedit==true}"> Cập nhật</span>
+                            <span th:unless="${isedit==true}">Lưu</span></button>
+                        <button class="btn btn-danger float-right">Xóa</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layout.html}">
+
+<head>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <div class="orderfinish" >
+            <h2>Đặt hàng thành công</h2>
+            <a href="">Tiếp tục mua hàng</a>
+            <a th:if="${orderId!=null}" th:href="@{'/order/detail/'+${orderId}}">Xem đơn hàng</a>
+        </div>
+    </section>
+    
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layout.html}">
+
+<head>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <div class="info-custom float-left">
+            <div class="comebackcart"><a href="">Giỏ hàng</a><i class="bi bi-caret-right-fill">Thông tin đơn
+                    hàng</i></div>
+            <div class="form-info">
+                <div class="title-security"><i class="bi bi-info-circle-fill"></i>Thông tin khách hàng tuyệt đối
+                    bảo mật</div>
+                <h3 style="padding: 10px 0;">Thông tin giao hàng:</h3>
+                <form th:action="@{/order}" id="form" method="post" th:object="${order}">
+                    <label for="hoTen">Họ và Tên</label>
+                    <input type="text" th:field="*{name}" id="hoTen" name="hoTen" placeholder="Họ & tên"><br>
+                    <small id="nameHId" ></small><br>
+                    <label for="diaChi">Địa chỉ</label>
+                    <textarea name="diaChi" th:field="*{adress}" id="diaChi" cols="" rows="5"
+                        placeholder="Địa chỉ"></textarea><br>
+                        <small id="addressHId" ></small><br>
+                    <label for="sdt">Số điện thoại</label>
+                    <input type="text" th:field="*{phone}" name="sdt" id="sdt" placeholder="Số điện thoại"><br>
+                    <small id="phoneHId" ></small><br>
+                    <label for="ghiChu">Ghi chú</label>
+                    <textarea name="ghiChi" th:field="*{note}" id="ghiChu" cols="" rows="5"
+                        placeholder="Ghi chú"></textarea>
+                        <br>
+                        <small id="noteHId" ></small>
+                    <label for="pptt">Phương thức thanh toán:</label><br>
+                    <input checked type="checkbox" id="checkbox1">
+                    <label for="checkbox1">Thanh toán khi nhận hàng</label>
+                    <br>
+                    <input disabled type="checkbox" id="checkbox2">
+                    <label for="checkbox2">Thanh toán qua MoMo (Sắp ra mắt)</label>
+                    <br>
+                    <small id="ptttHId" ></small>
+                    <div style="margin-top: 10px;text-align: right;">
+                        <a class="btn-backhome" th:href="@{/}">Quay lại
+                            trang chủ</a>
+                        <input id="submitt" type="button" value="Đặt hàng">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="info-cart float-left">
+            <div th:each=" item: ${carts}" class="listprductcart">
+                <div class="itemproductcart">
+                    <img class="float-left" th:src="@{'/uploads/images/'+${item.product.image}}" alt="">
+                    <ul class="float-left">
+                        <li th:text="${item.product.name}">Áo bà bầu</li>
+                        <li>size:M</li>
+                        <li th:text="${#numbers.formatInteger(item.product.unitPrice,3,'POINT')}">30000đ</li>
+                        <li>Số lương:<span th:text="${item.quantity}"></span></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="sumarypayment">
+                <ul>
+                    <li>Tạm tính:<span> đ</span><span th:text="${#numbers.formatInteger(summary,3,'POINT')}">
+                            100000</span></li>
+                    <li>Phí ship: <span> đ</span><span th:text="${summary>500000 ? 0 : 30.000 }"> 0</span></li>
+                    <li>Khuyến mãi: <span> đ</span><span> 0</span></li>
+                    <li>Tổng cộng: <span> đ</span><span
+                            th:text="${summary>500000 ? #numbers.formatInteger(summary,3,'POINT') : #numbers.formatInteger(summary +30000 ,3,'POINT')}">
+                            100000</span></li>
+                </ul>
+            </div>
+        </div>
+        <script>
+            document.getElementById("submitt").addEventListener("click", function () {
+                var name = document.getElementById("hoTen").value;
+                var address = document.getElementById("diaChi").value;
+                var phone = document.getElementById("sdt").value;
+                if (name == "") {
+                    document.getElementById("nameHId").innerText = "Bạn chưa nhập tên";
+                }
+                else document.getElementById("nameHId").innerText = "";
+                if (address == "") {
+                    document.getElementById("addressHId").innerText = "Bạn chưa nhập địa chỉ";
+                }
+                else document.getElementById("addressHId").innerText = "";
+                if (phone == "") {
+                    document.getElementById("phoneHId").innerText = "Bạn chưa nhập số điện thoại";
+                }
+                else document.getElementById("phoneHId").innerText = "";
+    
+                if (phone != "" && name!="" && address !="") {
+                    document.getElementById("form").submit();
+                }
+            });
+        </script>
+    </section>
+    
+</body>
+
+</html>

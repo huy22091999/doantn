@@ -1,0 +1,144 @@
+@media screen and (max-width:1150px){
+    header .search .search-txt {
+        width: 300px;
+       
+    }
+}
+@media screen and (max-width:1060px){
+    header .search .search-txt {
+        width: 250px;  
+    }
+    
+}
+ @media screen and (max-width:1000px){
+   
+    header .account {
+        margin-right: 0;
+    }
+    .search {
+        margin-left: 50px;
+    }
+}
+@media screen and (max-width:900px){
+    header .logo a {
+        margin-left: 0;
+    }
+}
+@media screen and (max-width:830px){
+    #search-nav{
+        display: block;
+    }
+    #search-head{
+        display: none;
+    }
+}
+@media screen and (max-width:750px){
+    .cart-item table tbody tr .product-info{
+        padding-left: 20px;
+    }
+    .cart-item table tbody tr .price{
+        padding-right: 20px;
+    }
+    .cart-item table tbody tr .sumary{
+        padding-right: 20px;
+    }
+    .cart-item table tbody tr .sumary{
+        padding-right: 20px;
+    }
+}
+@media screen and (max-width:700px)
+{
+    .cart-item table tbody tr .quantity ul li{
+        display: block;
+        margin-top: 10px;
+        text-align: center;
+    }
+    .cart-item table tbody tr .quantity span{
+        padding:5px 20px 7px 20px;
+    }
+    .cart-item table tbody tr .quantity{
+        width: 50px;
+    }
+    .cart-item table tbody tr .price{
+        width: 80px;
+    }
+    .cart-item table tbody tr .sumary{
+        width: 70px;
+    }
+}
+@media screen and (max-width:650px){
+    .cart-product{
+        margin: 40px 10px;
+    }
+}
+@media screen and (max-width:530px){
+    .search .search-txt {
+        width: 300px;  
+    }
+}
+@media screen and (max-width:600px){
+    .cart-item table tbody tr .product-info{
+        padding-left: 8px;
+    }
+    .cart-item table tbody tr .price{
+        padding-right: 8px;
+    }
+    .cart-item table tbody tr .sumary{
+        padding-right: 8px;
+    }
+    .cart-item table tbody tr .sumary{
+        padding-right: 8px;
+    }
+}
+@media screen and (max-width:500px){
+    .logo-text{
+        font-size: 23px;
+    }
+    header .account-profile-btn {
+        padding: 12px 10px;
+    }
+    header .account-more a {
+        padding: 0 20px;
+    }
+    header .logo .btn-menu {
+        margin-left: 10px;
+    }
+   
+}
+@media screen and (max-width:430px){
+    header .account-more a {
+        padding: 0 4px;
+    }
+    .logo-text{
+        font-size: 20px;
+    }
+    header .account-profile-btn {
+        padding: 12px 5px;
+        /* background-color: #4caf50; */
+    }
+    header .logo .btn-menu{
+        padding: 0;
+    }
+    .cart-item table tbody tr .image img{
+        
+        min-width: 70px;
+        
+    }
+    .cart-item table tbody tr .price{
+        width: auto;
+    } 
+    .cart-item table tbody tr .quantity{
+        width: auto;
+    }
+    .cart-item table tbody tr .sumary{
+        width: auto;
+    }
+    .cart-product{
+        margin: 30px 5px;
+    }
+    .search {
+        margin-left: 10px;
+    }
+    
+}
+

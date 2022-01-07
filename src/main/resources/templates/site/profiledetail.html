@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layout.html}">
+
+<head>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <div class="profile">
+            <div class="tab">
+                <div class="user-image"><i class="bi bi-person-bounding-box"> <span th:text="${custommer.name}">Huy </span> </i></div>
+                <a class="tablinks active" >Tài khoản của tôi</a>
+                <a th:href="@{/order/manageorder}"  class="tablinks">Đơn mua</a>
+                <a class="tablinks">Thông báo</a>
+            </div>
+
+            <div id="account" class="tabcontent">
+                <h4>Hồ sơ của tôi</h4>
+                <div th:if="${message!=null}" class="alert alert-primary" role="alert">
+                    <i th:text="${message}"></i>
+                  </div>
+                <form th:action="@{/savecus}" method="post" th:object="${custommer}">
+                    <label for="name">Name</label>
+                    <input class="input-text" th:field="*{name}" type="text" name="name" id="name">
+                    
+                    <label for="email">Email</label>
+                    <input class="input-text" th:field="*{email}" type="text" name="email" id="email">
+
+                    <label for="phone">Phone</label>
+                    <input class="input-text" type="text" th:field="*{phone}" name="phone" id="phone">
+
+                    <label for="password">Password</label>
+                    <input class="input-text" type="password" th:field="*{password}" name="password" id="password">
+                    <div class="account-btn-submit">
+                        <button class="btn-form" type="button" onclick="openChange()">Chỉnh sửa</button>
+                        <input class="btn-form float-right" type="submit" value="Lưu">
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>

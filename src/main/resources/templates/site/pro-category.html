@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layout.html}">
+
+<head>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <!-- -----product -->
+        <div class="sale">
+            <div th:if="${category!=null}" class="product">
+                <div class="title-category">
+                    <h4>Danh mục >> <span th:text="${category.name}"></span></h4>
+                </div>
+                <div class="product_list">
+                    <div th:each=" pro: ${category.products}" class="product-item float-left ">
+                        <div class="product-boxshadow">
+                            <a th:href="@{'/product/'+${pro.productId}}">
+                                <div class="product-image">
+                                    <div class="area-discount"><i class="t bi bi-bookmark-fill">
+                                            <span class="discount">-
+                                                <span th:text="${pro.discount}">20</span>
+                                                %
+                                            </span> </i></div>
+                                    <img th:src="@{'/uploads/images/'+${pro.image}}"
+                                        alt="Product Image">
+                                </div>
+                                <div class="product-price">
+                                    <div class="product-name">
+                                        <h4 th:text="${pro.name}">Tên áo quá dài thì chúng ta phải cắt bớt đi</h4>
+                                    </div>
+                                    <h4> <span th:text="${#numbers.formatInteger(pro.unitPrice,3,'POINT')}"> 150000</span><span>đ</span><del><span
+                                        th:text="${#numbers.formatInteger(pro.unitPrice +(pro.discount*pro.unitPrice)/100,3,'POINT')}">10000</span>
+                                            <span>đ</span>
+                                        </del></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+            <div th:if="${listSearch!=null}" class="product">
+                <div th:if="${key!=''}" class="title-category">
+                    <h4>Kết quả tìm kiếm cho '<i th:text="${key}"></i>'</h4>
+                </div>
+                <div class="product_list">
+                    <div th:each=" pro: ${listSearch}" class="product-item float-left ">
+                        <div class="product-boxshadow">
+                            <a th:href="@{'/product/'+${pro.productId}}">
+                                <div class="product-image">
+                                    <div class="area-discount"><i class="t bi bi-bookmark-fill">
+                                            <span class="discount">-
+                                                <span th:text="${pro.discount}">20</span>
+                                                %
+                                            </span> </i></div>
+                                    <img th:src="@{'/uploads/images/'+${pro.image}}"
+                                        alt="Product Image">
+                                </div>
+                                <div class="product-price">
+                                    <div class="product-name">
+                                        <h4 th:text="${pro.name}">Tên áo quá dài thì chúng ta phải cắt bớt đi</h4>
+                                    </div>
+                                    <h4> <span th:text="${#numbers.formatInteger(pro.unitPrice,3,'POINT')}"> 150000</span><span>đ</span><del><span
+                                        th:text="${#numbers.formatInteger(pro.unitPrice +(pro.discount*pro.unitPrice)/100,3,'POINT')}">10000</span>
+                                            <span>đ</span>
+                                        </del></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>

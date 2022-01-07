@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="/src/main/resources/static/css/site.css">
+    <link rel="stylesheet" href="/src/main/resources/static/css/responsive.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <main>
+        <header class="">
+            <div class="logo float-left">
+                <button class="btn-menu"><i class=" bi bi-list"></i></button>
+                <a class="logo-text" href="">Dũng Ngọc Shop</a>
+            </div>
+            <div id="search-head" class="search float-left">
+                <form action="">
+                    <input class="search-txt" type="text" placeholder="Search">
+                    <input class="search-btn" type="submit" value=" ">
+                </form>
+            </div>
+            <div class="account float-right">
+                <a style="display: none;" class="login" href="">Login</a>
+                <div class="account-more">
+                    <div class="float-right">
+                        <a class="cart" th:href="@{/cart}"> <i class="bi bi-cart2 "> <span
+                                    class="number-cart">0</span></i></a>
+                    </div>
+                    <div class="account-profile float-right">
+                        <span class="account-profile-btn" data-toggle="dropdown"><i class="bi bi-person-fill "></i><i
+                                class="bi bi-caret-down-fill"></i></span>
+                        <ul class="account-profile-more">
+                            <li> <a href="">Profile</a> </li>
+                            <li> <a href="">Logout</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="content">
+            <div class="navv float-left">
+                <div id="search-nav" class="search float-left">
+                    <form action="">
+                        <input class="search-txt" type="text" placeholder="Search">
+                        <input class="search-btn" type="submit" value=" ">
+                    </form>
+                </div>
+                <ul>
+                    <li class="category">Danh Mục Sản Phẩm</li>
+                    <li> <a href="">Giày dép</a> 
+                        <div class="dropdown-container">
+                            <a href="#">Link 1</a>
+                            <a href="#">Link 2</a>
+                            <a href="#">Link 3</a>
+                          </div>
+                    </li>
+                    <li> <a href="">Quần áo</a> </li>
+                    <li> <a href="">Quần áo</a> </li>
+                </ul>
+            </div>
+            <div class="overflow"></div>
+            <section>
+                <div class="profile">
+                    <div class="tab">
+                        <div class="user-image"><i class="bi bi-person-bounding-box"> <span>Huy </span> </i></div>
+                        <a href="/src/main/resources/templates/site/test/test copy.html" class="tablinks">Tài khoản của
+                            tôi</a>
+                        <a class="tablinks active">Đơn mua</a>
+                        <a class="tablinks">Thông báo</a>
+                    </div>
+                    <div id="ordermanage" class="tabcontent">
+                        <div class="btn-tab"><button class="tablink" onclick="openPage('all', this)">Tất cả</button>
+                            <button class="tablink" onclick="openPage('new1', this)" id="sub-defaultOpen">Chờ xác
+                                nhận</button>
+                            <button class="tablink" onclick="openPage('new2', this)">Chờ lấy hàng</button>
+                            <button class="tablink" onclick="openPage('new3', this)">Đang giao </button>
+                            <button class="tablink" onclick="openPage('new4', this)">Đã giao</button>
+                            <button class="tablink" onclick="openPage('new0', this)">Đã hủy</button>
+                        </div>
+                        <div id="all" class="sub-tabcontent">
+                            <div class="oder-item">
+                                <div class="product-order-list">
+                                    <div class="product-order-item">
+                                        <img class="float-left"
+                                            src="/src/main/resources/static/uploads/images/p7aae5f6f-a26c-4ae0-879a-e42a55ad70c3.jpg"
+                                            alt="">
+                                        <ul class="float-left">
+                                            <li>Tên sản phẩm</li>
+                                            <li>size:m</li>
+                                            <li>số lượng:1</li>
+                                        </ul>
+                                        <div class="float-right product-order-item-price"><del>10000đ</del>
+                                            <span>7000đ</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-order-item">
+                                        <img class="float-left"
+                                            src="/src/main/resources/static/uploads/images/p7aae5f6f-a26c-4ae0-879a-e42a55ad70c3.jpg"
+                                            alt="">
+                                        <ul class="float-left">
+                                            <li>Tên sản phẩm</li>
+                                            <li>size:m</li>
+                                            <li>số lượng:1</li>
+                                        </ul>
+                                        <div class="float-right product-order-item-price"><del>10000đ</del>
+                                            <span>7000đ</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="order-item-price float-right">
+                                    <h4>tổng:10000000đ</h4>
+                                    <div><a class="btn-form" href="#">Hủy</a>
+                                        <a class="btn-form" href="#">Đã nhận</a></div>
+                                </div>
+                            </div>
+                           
+                        </div>
+
+                        <div id="new1" class="sub-tabcontent">
+                            <h3>News</h3>
+                            <p>Some news this fine day!</p>
+                        </div>
+
+                        <div id="new2" class="sub-tabcontent">
+                            <h3>Contact</h3>
+                            <p>Get in touch, or swing by for a cup of coffee.</p>
+                        </div>
+
+                        <div id="new3" class="sub-tabcontent">
+                            <h3>About</h3>
+                            <p>Who we are and what we do.</p>
+                        </div>
+                        <div id="new4" class="sub-tabcontent">
+                            <h3>About</h3>
+                            <p>Who we are and what we do.</p>
+                        </div>
+                        <div id="new0" class="sub-tabcontent">
+                            <h3>About</h3>
+                            <p>Who we are and what we do.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+            </section>
+        </div>
+    </main>
+
+    <script></script>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/src/main/resources/static/js/site.js"></script>
+
+</html>

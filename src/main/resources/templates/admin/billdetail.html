@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{admin/dashboard.html}">
+
+<head>
+</head>
+
+<body>
+
+  <section class="container mt-3" layout:fragment="content">
+
+    <div class="w-100 overflow-hidden"> <a class="text-right float-right btn btn-primary" href="">Trở về</a></div>
+    <div class="bill ">
+      <div class="row  order">
+        <div class="col-6 customer-detail">
+
+          <ul>
+            <li>
+              <h4>Thông tin khách hàng</h4>
+            </li>
+            <li>Họ và tên:  <span th:text="${bill.customer.name}">Huy Nguyễn</span></li>
+            <li>SĐT:<span th:text="${bill.customer.phone}">Huy Nguyễn</span></li>
+            <li>email:<span th:text="${bill.customer.email}" >huycntt</span></li>
+          </ul>
+          <ul>
+            <li>
+              <h4>Thông tin giao hàng</h4>
+            </li>
+            <li>Họ và tên:<span th:text="${bill.name}">Huy Nguyễn</span></li>
+            <li>Địa chỉ: <span th:text="${bill.adress}">phú bình thái nguyên</span></li>
+            <li>SĐT:<span th:text="${bill.phone}">0369645387 </span></li>
+          </ul>
+        </div>
+        <div class="col-6 text-right order-detail">
+          <h2> Đơn hàng</h2>
+          <p >Mã đơn: <span th:text="'#'+${bill.oderId}">#1001</span></p>
+          <p>Ngày tạo:<span th:text="'#'+${bill.oderDate}">20/9/2021 19:30</span></p>
+        </div>
+      </div>
+      <div class="bill-detail">
+        <table>
+          <thead>
+            <tr>
+              <td colspan="2">Sản phẩm</td>
+              <td>Đơn giá</td>
+              <td>Số lượng</td>
+              <td>Thành tiền</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="item: ${bill.oderDetails}">
+              <td class="image">
+                <img th:src="@{'/uploads/images/'+${item.product.image}}" alt="image-error">
+              </td>
+              <td class="product-info">
+                <ul>
+                  <li th:text="${item.product.name}">Áo kiểu thắt nơ</li>
+                  <li>Size:m</li>
+                </ul>
+              </td>
+              <td class="price"><span th:text="${#numbers.formatInteger(item.product.unitPrice,3,'POINT')}">18000</span><span>đ</span><br>
+
+              </td>
+              <td class="quantity">
+                <span th:text="${item.quantity}">1</span>
+              </td>
+              <td class="sumary"><span th:text="${#numbers.formatInteger(item.quantity*item.product.unitPrice,3,'POINT')}">18000</span><span>đ</span></td>
+            </tr>
+            <tr>
+              <td colspan="5">
+                <div class="col-5 float-right">
+                  <ul>
+                    <li>Tổng giá trị sản phẩm: <span class="float-right"><span th:text="${#numbers.formatInteger(bill.summary,3,'POINT')}"></span>đ</span></li>
+                    <li>Mã khuyến mãi(): <span class="float-right">0đ</span></li>
+                    <li>Phí vận chuyển(): <span class="float-right"><span th:text="${#numbers.formatInteger(bill.ship,3,'POINT')}"></span>đ</span></li>
+                    <li>Số tiền phải thanh toán: <span class="float-right"><span th:text="${#numbers.formatInteger(bill.summary+bill.ship,3,'POINT')}"></span> đ</span></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="row summary-pay">
+          <div class="col-6">
+            <h3>Phương thức thanh toán</h3>
+            <p>Thanh toán khi nhận hàng</p>
+          </div>
+          <div class="col-6 text-right">
+            <h4>Thanh toán: <span ><span th:text="${#numbers.formatInteger(bill.summary+bill.ship,3,'POINT')}"></span></span>đ</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+
+</html>

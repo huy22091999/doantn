@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Đăng kí - Huy Phụng Kiện</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href='https://fonts.googleapis.com/css?family=Bungee Shade' rel='stylesheet'>
+</head>
+
+<body>
+    <main class="container">
+        <section class="col-8 offset-2 mt-5 mb-5">
+            <form th:action="@{/dosignin}" id="formm" method="POST" th:object="${customer}">
+                <div class="card">
+                    <div class="text-xl-center card-header"
+                        style="font-family:Bungee Shade ;font-size: 30px;color: aquamarine;">
+                        Huy Phụng Kiện</div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Sign in</h3>
+                            <div th:if="${message!=null}" class="alert alert-primary" role="alert">
+                                <i th:text="${message}"></i>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" th:field="*{name}" class="form-control" name="name" id="name"
+                                    aria-describedby="helpId" placeholder="Name">
+                                <small id="nameHelpId" class="form-text text-muted"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Phone">Phone</label>
+                                <input type="text" th:field="*{phone}" class="form-control" name="phone" id="phone"
+                                    aria-describedby="helpId" placeholder="Phone">
+                                <small id="phoneHelpId" class="form-text text-muted"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="text" class="form-control" th:field="*{email}" name="email" id="email"
+                                    aria-describedby="helpId" placeholder="Email">
+                                <small id="emailHelpId" class="form-text text-muted"></small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" th:field="*{password}" class="form-control" name="password"
+                                    id="password" aria-describedby="helpId" placeholder="Password">
+                                <small id="passwordHelpId" class="form-text text-muted"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password Confim</label>
+                                <input type="password" class="form-control" name="" id="passwordconfim"
+                                    aria-describedby="helpId" placeholder="Password Confim">
+                                <small id="comfimHelpId" class="form-text text-muted"></small>
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <button type="reset" class="btn btn-secondary">Reset</button>
+                            <button id="submitt" type="button" class="btn btn-primary">Sign in</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </section>
+    </main>
+    <script>
+        document.getElementById("submitt").addEventListener("click", function () {
+            
+            var name = document.getElementById("name").value;
+            var phone = document.getElementById("phone").value;
+            var email = document.getElementById("email").value;
+            var pass = document.getElementById("password").value;
+            var confim = document.getElementById("passwordconfim").value;
+            if (name == "") {
+                document.getElementById("nameHelpId").innerText = "Bạn chưa nhập tên";
+            }
+            else document.getElementById("nameHelpId").innerText = "";
+
+            if (phone == "") {
+                document.getElementById("phoneHelpId").innerText = "Bạn chưa nhập số điện thoại";
+            }
+            else document.getElementById("phoneHelpId").innerText = "";
+
+            if (email == "") {
+                document.getElementById("emailHelpId").innerText = "Bạn chưa nhập email";
+            } else document.getElementById("emailHelpId").innerText = "";
+
+            if (pass == "") {
+                document.getElementById("passwordHelpId").innerText = "Bạn chưa nhập password";
+            }
+            else document.getElementById("passwordHelpId").innerText = "";
+
+            if (confim == "") {
+                document.getElementById("comfimHelpId").innerText = "Mời nhập lại password";
+            } else if (confim != pass) {
+                document.getElementById("comfimHelpId").innerText = "Bạn password không trùng khớp";
+            }
+
+            if(name!=""&&phone!=""&&email!=""&&pass!=""&&confim==pass)
+            {
+                document.getElementById("formm").submit();
+            }
+            
+        });
+    </script>
+    <!-- Optional JavaScript -->
+   <!-- jQuery first, then Popper.js, then Bootstrap JS --> 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script> 
+</body>
+
+</html>

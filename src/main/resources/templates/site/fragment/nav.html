@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head></head>
+
+<body>
+    <div th:fragment="nav">
+        <div class="navv float-left">
+            <div id="search-nav" class="search float-left">
+                <form action="">
+                    <input class="search-txt" type="text" placeholder="Tìm kiếm">
+                    <input class="search-btn" type="submit" value=" ">
+                </form>
+            </div>
+            <ul>
+                <li class="category">Danh Mục Sản Phẩm</li>
+                <li th:each=" item: ${categorys}"> <a th:href="@{'/category/'+${item.categoryId}}" 
+                    th:text="${item.name}">Giày dép <i th:if="${item.categorys!=null && item.categorys.size>0}" class="bi bi-caret-down-fill"></i></a> 
+                        <div th:if="${item.categorys!=null && item.categorys.size>0}" class="dropdown-container">
+                            <a th:each=" i: ${item.categorys}" th:text="${i.name}" th:href="@{'/category/'+${i.categoryId}}" >Link 1</a>
+                        </div></li>
+            </ul>
+        </div>
+        <div class="overflow"></div>
+    </div>
+</body>
+
+</html>

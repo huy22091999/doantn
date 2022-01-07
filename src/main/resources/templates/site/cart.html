@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layout.html}">
+
+<head>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <div class="cart-product">
+            <div class="cart-title">
+                <h3>Giỏ hàng của bạn<span>(gồm <span th:text="${numCart!=null ? numCart : 0}"></span> sản phẩm)</span></h3>
+            </div>
+            <div class="cart-item">
+                <table>
+                    <thead>
+                        <tr>
+                            <td colspan="2">Sản phẩm</td>
+                            <td>Đơn giá</td>
+                            <td>Số lượng</td>
+                            <td>Thành tiền</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="item: ${carts}">
+                            <td class="image">
+                                <img th:src="@{'/uploads/images/'+${item.product.image}}" alt="image-error">
+                            </td>
+                            <td class="product-info">
+                                <ul>
+                                    <li th:text="${item.product.name}">Áo kiểu thắt nơ</li>
+                                    <li>Size:m</li>
+                                </ul>
+                            </td>
+                            <td class="price"><span
+                                    th:text=" ${#numbers.formatInteger(item.product.unitPrice,3,'POINT')}">18000</span><span>đ</span><br><del><span th:text="${#numbers.formatInteger(item.product.unitPrice+(item.product.unitPrice*item.product.discount/100),3,'POINT')}">25000</span>đ</del>
+                            </td>
+                            <td class="quantity">
+                                <ul>
+                                    <li><a th:href="@{'/cart/dowsl/'+${item.cartId}}">-</a></li>
+                                    <li> <span th:text="${item.quantity}">1</span></li>
+                                    <li><a th:href="@{'/cart/upsl/'+${item.cartId}}">+</a></li>
+                                </ul>
+                            </td>
+                            <td class="sumary"><span th:text="${#numbers.formatInteger(item.quantity*item.product.unitPrice,3,'POINT')}" >18000</span><span>đ</span></td>
+                        <tr class="sumpay">
+                            <td colspan="3"></td>
+                            <td>Tổng tiền:</td>
+                            <td><span th:text="${#numbers.formatInteger(summary,3,'POINT')}" >1000000</span>đ</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pay"><a class="btn btn-back" href=""><i class="bi bi-arrow-left-short"></i>Tiếp tục
+                        mua sắm</a>
+                    <a th:if="${carts.size>0}" class="btn btn-pay" th:href="@{/cart/payment}">Tiến hành thanh toán</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</body>
+
+</html>

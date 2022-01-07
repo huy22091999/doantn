@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{site/layout.html}">
+
+<head>
+</head>
+
+<body>
+    <section layout:fragment="content">
+        <div class="slideshow-container">
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+                <img src="https://cdn.gumac.vn/image/01/2021/thang-8-2021/biabstthang8030820212237293107.jpg"
+                    style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="https://cdn.gumac.vn/image/01/2021/thang-8-2021/biabstthang8030820212237293107.jpg"
+                    style="width:100%">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="https://cdn.gumac.vn/image/slide/cover-2-web200820211611112622.png" style="width:100%">
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <br>
+        <!-- -----product -->
+        <div class="sale">
+            <div class="product">
+                <div class="title">
+                    <h3 class="top_title">
+                        [Top mới nhất]
+                    </h3>
+                    <h4 class="top_subtitle">New Arrival</h4>
+                </div>
+
+                <div class="product_list">
+                    <div th:each=" pro: ${products}" class="product-item float-left ">
+                        <div class="product-boxshadow">
+                            <a th:href="@{'product/'+${pro.productId}}">
+                                <div class="product-image">
+                                    <div class="area-discount"><i class="t bi bi-bookmark-fill">
+                                            <span class="discount">-
+                                                <span th:text="${pro.discount}">20</span>
+                                                %
+                                            </span> </i></div>
+                                    <img th:each=" image: ${pro.images}" th:src="@{'/uploads/images/'+${image}}"
+                                        alt="Product Image">
+                                </div>
+                                <div class="product-price">
+                                    <div class="product-name">
+                                        <h4 th:text="${pro.name}">Tên áo quá dài thì chúng ta phải cắt bớt đi</h4>
+                                    </div>
+                                    <h4> <span th:text="${#numbers.formatInteger(pro.unitPrice,3,'POINT')}"> 150000</span><span>đ</span><del><span
+                                        th:text="${#numbers.formatInteger(pro.unitPrice +(pro.discount*pro.unitPrice)/100,3,'POINT')}">10000</span>
+                                            <span>đ</span>
+                                        </del></h4>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

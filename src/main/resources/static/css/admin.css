@@ -1,0 +1,82 @@
+.bill {
+    background-color: #eeeeee;
+    margin-top: 40px;
+    border: solid 0.3px #4e4d4d;
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+.bill .order {}
+
+.bill .order .customer-detail {}
+
+.bill .order .order-detail {}
+
+.bill ul li {
+    list-style-type: none;
+}
+
+.bill-detail {}
+
+.bill-detail table {
+    width: 100%;
+    border-spacing: 0;
+}
+
+.bill-detail table thead tr {
+    background-color: rgb(214, 212, 212);
+    padding: 20px 0px;
+}
+
+.bill-detail table thead tr td {
+    font-size: 20px;
+    padding: 5px 0 5px 10px;
+    font-weight: 800;
+}
+
+.bill-detail table tbody tr .image {
+    width: 160px;
+    overflow: hidden;
+}
+
+.bill-detail table tbody tr .image img {
+    width: 100%;
+    min-width: 100px;
+    height: auto;
+}
+
+.bill-detail table tbody tr td {
+    padding: 10px 0;
+    border-bottom: solid 1px #4e4d4d;
+}
+
+.bill-detail table tbody tr .product-info {
+    padding-left: 40px;
+}
+
+.bill-detail table tbody tr td ul li {
+    list-style-type: none;
+}
+
+.bill-detail table tbody tr .price {
+    text-align: right;
+    padding-right: 40px;
+    width: 120px;
+}
+
+.bill-detail table tbody tr .sumary {
+    text-align: right;
+    padding-right: 40px;
+    width: 150px;
+    min-width: 70px;
+}
+
+.bill-detail table tbody .sumpay td {
+    border: none;
+}
+footer h4 {
+    font-size: 16px;
+}
+footer h4{
+    font-size: 18.7px;
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head></head>
+
+<body>
+
+    <header th:fragment="header">
+        <div class="logo float-left">
+            <button class="btn-menu"><i class=" bi bi-list"></i></button>
+            <a class="logo-text" th:href="@{/}">Huy Phụng Kiện</a>
+        </div>
+        <div id="search-head" class="search float-left">
+            <form th:action="@{/search}" id="form-search" method="GET" >
+                <input class="search-txt" type="text" name="key" th:value="${key}" placeholder="Search">
+                <input onclick="search()"  class="search-btn" type="button" value=" ">
+            </form>
+        </div>
+        <div class="account float-right">
+            <div th:if="${customerId==null}">
+                <a  class="login" th:href="@{/login}">Đăng nhập</a>
+                <a  class="login" th:href="@{/signin}">Đăng kí</a>
+            </div>
+            <div th:if="${customerId!=null}" class="account-more">
+                <div class="float-right">
+                    <a class="cart" th:href="@{/cart}"> <i class="bi bi-cart2 "> <span class="number-cart" th:text="${numCart}">0</span></i></a>
+                </div>
+                <div class="account-profile float-right">
+                    <span class="account-profile-btn" data-toggle="dropdown"><i class="bi bi-person-fill "></i><i
+                            class="bi bi-caret-down-fill"></i></span>
+                    <ul class="account-profile-more">
+                        <li> <a th:href="@{/detailacc}">Hồ sơ</a> </li>
+                        <li> <a th:href="@{/logout}">Đăng xuất</a> </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+</body>
+</html>
